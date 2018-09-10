@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  TextInput,
   StyleSheet,
   Text,
   View,
@@ -9,7 +10,7 @@ import {
 import Title from '../components/Title';
 import InputList from '../components/InputList';
 
-export default class Worst extends Component {
+export default class Prevent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,14 +23,14 @@ export default class Worst extends Component {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <View>
-          <Title>List the worst things that could happen.</Title>
+          <Title>How could you prevent these?</Title>
           <InputList />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => navigation.dispatch({ type: 'Define' })}>
+          <TouchableOpacity onPress={() => navigation.dispatch({ type: 'Worst' })}>
             <Text style={styles.touchText}>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.dispatch({ type: 'Prevent' })}>
+          <TouchableOpacity>
             <Text style={styles.touchText}>Next</Text>
           </TouchableOpacity>
         </View>
