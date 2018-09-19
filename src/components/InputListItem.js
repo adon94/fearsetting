@@ -1,58 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Dimensions,
   StyleSheet,
   TextInput,
-  Text,
   View,
 } from 'react-native';
+import ListIndex from './ListIndex';
 
 const { width } = Dimensions.get('window');
 
-export default class InputListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
+const InputListItem = ({
+  id, text, updateText, showIndex, placeholder, checkKeyPress, addItem,
+}) => (
+  <View style={styles.container}>
+    {showIndex
+      && <ListIndex index={id} />
   }
-  
-  render() {
-    const { item: { key } } = this.props;
-    return (
-      <View style={styles.container}>
-        <View style={styles.indexContainer}>
-          <Text style={styles.index}>{key}.</Text>
-        </View>
-        <TextInput
-          style={{ fontSize: 20, width: width - 70 }}
-          multiline={true}
-          onChangeText={(text) => this.setState({ text })}
-          placeholder="Write it here..."
-          value={this.state.text}
-          autoFocus={true}
-          returnKeyType="next"
-        />
-      </View>
-    );
-  }
-}
+    <TextInput
+      style={{ fontSize: 20, width: width - 70 }}
+      multiline
+      onChangeText={textInput => updateText(textInput)}
+      placeholder={placeholder || 'Write it here...'}
+      value={text}
+      autoFocus
+      onKeyPress={e => checkKeyPress(e, text.length)}
+      blurOnSubmit
+      onSubmitEditing={() => addItem()}
+    />
+  </View>
+);
+
+export default InputListItem;
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginBottom: 5,
-  },
-  indexContainer: {
-    width: 30,
-    paddingTop: 5,
-  },
-  index: {
-    fontSize: 20,
-  },
-  bigText: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    marginBottom: 10,
   },
 });

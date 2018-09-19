@@ -4,21 +4,24 @@ import {
   View,
   KeyboardAvoidingView,
 } from 'react-native';
-import InputList from '../components/InputList';
 import Header from '../components/Header';
+import RespondList from '../components/RespondList';
 import NavButtons from '../components/NavButtons';
 
-const Define = ({ navigation }) => (
+const Repair = ({ navigation }) => (
   <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
     <View>
-      <Header title="Define" description="Define the worst-case scenarios." />
-      <InputList type="worstThings" />
+      <Header
+        title="Repair"
+        description="How could you repair each of the worst-case scenarios?"
+      />
+      <RespondList type="repair" />
     </View>
-    <NavButtons navigation={navigation} routeBack="Decision" routeNext="Prevent" />
+    <NavButtons navigation={navigation} routeBack="Prevent" routeNext="Preview" />
   </KeyboardAvoidingView>
 );
 
-export default Define;
+export default Repair;
 
 const styles = StyleSheet.create({
   container: {

@@ -5,17 +5,16 @@ import {
 } from 'react-native';
 
 const Title = (props) => {
-  const { children:title } = props
+  const { children: title, large } = props;
   return (
-    <Text style={styles.bigText}>{title}</Text>
+    <Text style={[styles.bigText, { fontSize: large ? 36 : 30 }]}>{title}</Text>
   );
-}
+};
 
 export default Title;
 
 const styles = StyleSheet.create({
   bigText: {
-    fontSize: 34,
     fontWeight: 'bold',
     marginBottom: 10,
   },

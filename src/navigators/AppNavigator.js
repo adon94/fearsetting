@@ -4,9 +4,16 @@ import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
-import Define from '../screens/Define';
+import Decision from '../screens/Decision';
 import Prevent from '../screens/Prevent';
-import Worst from '../screens/Worst';
+import Define from '../screens/Define';
+import Repair from '../screens/Repair';
+import Preview from '../screens/Preview';
+import Benefits from '../screens/Benefits';
+import Costs from '../screens/Costs';
+import Summary from '../screens/Summary';
+import Menu from '../screens/Menu';
+import SwipeNav from '../components/SwipeNav';
 
 const middleware = createReactNavigationReduxMiddleware(
   'root',
@@ -15,15 +22,22 @@ const middleware = createReactNavigationReduxMiddleware(
 
 const RootNavigator = createStackNavigator(
   {
-    Define: { screen: Define },
+    Decision: { screen: Decision },
     Prevent: { screen: Prevent },
-    Worst: { screen: Worst },
+    Define: { screen: Define },
+    Repair: { screen: Repair },
+    Preview: { screen: Preview },
+    Benefits: { screen: Benefits },
+    Costs: { screen: Costs },
+    Summary: { screen: Summary },
+    Menu: { screen: Menu },
+    SwipeNav: { screen: SwipeNav },
   },
   {
     headerMode: 'none',
     cardStyle: {
       backgroundColor: '#FFFFFF',
-      paddingTop: 40,
+      paddingTop: 50,
       paddingHorizontal: 20,
     },
   },
