@@ -14,6 +14,7 @@ import {
   editThing,
   editBenefit,
   editCost,
+  removeThing,
 } from '../actions';
 import InputListItem from './InputListItem';
 
@@ -22,12 +23,10 @@ const InputList = (props) => {
   let itemName;
   if (type === 'worstThings') {
     itemName = 'define';
-  } else if (type === 'benefits') {
-    itemName = 'benefit';
-  } else if (type === 'costs') {
-    itemName = 'cost';
+  } else if (type === 'benefits' || type === 'costs') {
+    itemName = 'text';
   }
-  // const itemName = type === 'worstThings' ? 'define' : 'benefit';
+  // const itemName = type === 'worstThings' ? 'define' : 'text';
   const addItem = () => {
     const { dispatch } = props;
     if (type === 'worstThings') {
@@ -48,21 +47,26 @@ const InputList = (props) => {
     </TouchableOpacity>
   );
 
-  const renderItem = item => (
+  const renderItem = (item, index) => (
     <InputListItem
       id={item.id}
+      index={index}
       text={item[itemName]}
       showIndex
       updateText={text => updateItem(text, item.id)}
-      checkKeyPress={(e, textLength) => checkKeyPress(e, textLength)}
+      checkKeyPress={(e, textLength, id) => checkKeyPress(e, textLength, id)}
       addItem={() => addItem()}
+      placeholder="I could..."
     />
   );
 
-  const checkKeyPress = (e, textLength) => {
+  const { listItems } = props;
+
+  const checkKeyPress = (e, textLength, id) => {
     const { key } = e.nativeEvent;
-    if (key === 'Backspace') {
-      console.log(textLength);
+    if (key === 'Backspace' && textLength === 0 && listItems.length > 1) {
+      const { dispatch } = props;
+      dispatch(removeThing(id));
     }
   };
 
@@ -71,17 +75,16 @@ const InputList = (props) => {
     if (type === 'worstThings') {
       dispatch(editThing({ define: text, id }));
     } else if (type === 'benefits') {
-      dispatch(editBenefit({ benfit: text, id }));
+      dispatch(editBenefit({ text, id }));
     } else if (type === 'costs') {
-      dispatch(editCost({ cost: text, id }));
+      dispatch(editCost({ text, id }));
     }
   };
 
-  const { listItems } = props;
   return (
     <FlatList
       data={listItems}
-      renderItem={({ item }) => renderItem(item)}
+      renderItem={({ item, index }) => renderItem(item, index)}
       ListFooterComponent={() => renderFooter()}
       keyExtractor={item => item.id.toString()}
     />

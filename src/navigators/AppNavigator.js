@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
@@ -13,14 +13,13 @@ import Benefits from '../screens/Benefits';
 import Costs from '../screens/Costs';
 import Summary from '../screens/Summary';
 import Menu from '../screens/Menu';
-import SwipeNav from '../components/SwipeNav';
 
 const middleware = createReactNavigationReduxMiddleware(
   'root',
   state => state.navigation,
 );
 
-const RootNavigator = createStackNavigator(
+const MainNavigator = createSwitchNavigator(
   {
     Decision: { screen: Decision },
     Prevent: { screen: Prevent },
@@ -30,18 +29,37 @@ const RootNavigator = createStackNavigator(
     Benefits: { screen: Benefits },
     Costs: { screen: Costs },
     Summary: { screen: Summary },
-    Menu: { screen: Menu },
-    SwipeNav: { screen: SwipeNav },
   },
   {
     headerMode: 'none',
     cardStyle: {
       backgroundColor: '#FFFFFF',
-      paddingTop: 50,
-      paddingHorizontal: 20,
     },
   },
 );
+
+const RootNavigator = createStackNavigator(
+  {
+    Main: {
+      screen: MainNavigator,
+    },
+    Menu: {
+      screen: Menu,
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    cardStyle: {
+      backgroundColor: '#FFFFFF',
+    },
+  },
+);
+
+// const MainNav = createStackNavigator({
+//   stackMain: { screen: RootNavigator },
+//   modalMain: { screen: modalNavigator },
+// });
 
 const AppWithNavigationState = reduxifyNavigator(RootNavigator, 'root');
 

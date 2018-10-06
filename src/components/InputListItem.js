@@ -10,11 +10,11 @@ import ListIndex from './ListIndex';
 const { width } = Dimensions.get('window');
 
 const InputListItem = ({
-  id, text, updateText, showIndex, placeholder, checkKeyPress, addItem,
+  id, text, updateText, showIndex, placeholder, addItem, checkKeyPress, index,
 }) => (
   <View style={styles.container}>
     {showIndex
-      && <ListIndex index={id} />
+      && <ListIndex index={index + 1} />
   }
     <TextInput
       style={{ fontSize: 20, width: width - 70 }}
@@ -22,8 +22,8 @@ const InputListItem = ({
       onChangeText={textInput => updateText(textInput)}
       placeholder={placeholder || 'Write it here...'}
       value={text}
-      autoFocus
-      onKeyPress={e => checkKeyPress(e, text.length)}
+      // autoFocus
+      onKeyPress={checkKeyPress ? key => checkKeyPress(key, text.length, id) : null}
       blurOnSubmit
       onSubmitEditing={() => addItem()}
     />

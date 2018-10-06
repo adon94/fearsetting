@@ -1,15 +1,3 @@
-// const store = {
-//   decision: 'String',
-//   worstThings: [
-//     {
-//       id: '',
-//       define: '',
-//       prevent: '',
-//       repair: '',
-//     },
-//   ],
-// }
-
 const initialState = [{
   id: 1,
   define: '',
@@ -32,26 +20,24 @@ const worstThings = (state = initialState, action) => {
     case 'EDIT_THING':
       return state.map((item) => {
         if (item.id !== action.item.id) {
-          // This isn't the item we care about - keep it as-is
           return item;
         }
         const newItem = item;
         newItem.define = action.item.define;
-        // Otherwise, this is the one we want - return an updated value
         return {
           ...item,
           ...newItem,
         };
       });
+    case 'REMOVE_THING':
+      return state.filter(item => item.id !== action.id);
     case 'EDIT_PREVENT':
       return state.map((item) => {
         if (item.id !== action.item.id) {
-          // This isn't the item we care about - keep it as-is
           return item;
         }
         const newItem = item;
         newItem.prevent = action.item.prevent;
-        // Otherwise, this is the one we want - return an updated value
         return {
           ...item,
           ...newItem,
@@ -60,12 +46,10 @@ const worstThings = (state = initialState, action) => {
     case 'EDIT_REPAIR':
       return state.map((item) => {
         if (item.id !== action.item.id) {
-          // This isn't the item we care about - keep it as-is
           return item;
         }
         const newItem = item;
         newItem.repair = action.item.repair;
-        // Otherwise, this is the one we want - return an updated value
         return {
           ...item,
           ...newItem,

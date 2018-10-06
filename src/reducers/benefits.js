@@ -1,6 +1,6 @@
 const initialState = [{
   id: 1,
-  benefit: '',
+  text: '',
 }];
 
 const benefits = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const benefits = (state = initialState, action) => {
         ...state,
         {
           id: action.id,
-          benefit: '',
+          text: '',
         },
       ];
     case 'EDIT_BENEFIT':
@@ -20,7 +20,7 @@ const benefits = (state = initialState, action) => {
           return item;
         }
         const newItem = item;
-        newItem.benefit = action.item.benefit;
+        newItem.text = action.item.text;
         // Otherwise, this is the one we want - return an updated value
         return {
           ...item,

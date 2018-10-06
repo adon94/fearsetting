@@ -5,9 +5,11 @@ import {
 } from 'react-native';
 
 const Description = (props) => {
-  const { children: text } = props;
+  const { children: text, bold } = props;
   return (
-    <Text style={styles.descriptionText}>{text}</Text>
+    <Text style={[styles.descriptionText, { fontWeight: bold ? 'bold' : 'normal' }]}>
+      {text}
+    </Text>
   );
 };
 

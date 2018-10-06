@@ -42,10 +42,6 @@ const menuItems = [
     route: 'Summary',
     icon: 'file-alt',
   },
-  {
-    route: 'SwipeNav',
-    icon: 'question-circle',
-  },
 ];
 
 const MenuItem = (item, navigation) => (
@@ -70,6 +66,7 @@ const Menu = ({ navigation }) => (
         data={menuItems}
         renderItem={({ item }) => MenuItem(item, navigation)}
         keyExtractor={item => item.route}
+        scrollEnabled={false}
       />
     </View>
   </View>
@@ -82,6 +79,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingBottom: 25,
+    paddingTop: 50,
+    paddingHorizontal: 20,
   },
   menuItem: {
     paddingVertical: 10,

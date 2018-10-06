@@ -5,12 +5,20 @@ import {
   RootNavigator,
 } from '../navigators/AppNavigator';
 
-const initialAction = RootNavigator.router.getActionForPathAndParams('Menu');
+const initialAction = RootNavigator.router.getActionForPathAndParams('Main');
 const initialNavState = RootNavigator.router.getStateForAction(initialAction);
 
 function navigation(state = initialNavState, action) {
   let nextState;
   switch (action.type) {
+    case 'Main':
+      nextState = RootNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: 'Main',
+        }),
+        state,
+      );
+      break;
     case 'Decision':
       nextState = RootNavigator.router.getStateForAction(
         NavigationActions.navigate({

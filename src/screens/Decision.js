@@ -11,7 +11,10 @@ import { editDecision } from '../actions';
 
 const Decision = ({ navigation, decision: { text }, dispatch }) => (
   <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-    <Header title="Decision" description="Define your decision." />
+    <Header
+      title="The decision"
+      description="Write down the decision you're considering."
+    />
     <TextInput
       style={{ height: 40, fontSize: 20, alignSelf: 'center' }}
       multiline
@@ -35,5 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingBottom: 25,
+    paddingTop: 50,
+    paddingHorizontal: 20,
   },
 });

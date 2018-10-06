@@ -3,7 +3,6 @@ const initialState = {
 };
 
 const benefits = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case 'EDIT_DECISION':
       return {

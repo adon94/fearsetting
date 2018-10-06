@@ -2,9 +2,9 @@ let nextThingId = 2;
 let nextBenefitId = 2;
 let nextCostId = 2;
 
-export const editDecision = item => ({
+export const editDecision = payload => ({
   type: 'EDIT_DECISION',
-  item,
+  payload,
 });
 export const addThing = () => ({
   type: 'ADD_THING',
@@ -14,6 +14,11 @@ export const addThing = () => ({
 export const editThing = item => ({
   type: 'EDIT_THING',
   item,
+});
+
+export const removeThing = id => ({
+  type: 'REMOVE_THING',
+  id,
 });
 
 export const editPrevent = item => ({
